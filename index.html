@@ -3,11 +3,74 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width" />
     <title>Weather Forecast</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
 
   <body>
-    <div class="container"></div>
+    <input
+      type="search"
+      id="site-search"
+      name="q"
+      placeholder="Search a city"
+      class="search-bar"
+    />
+    <div class="current-forecast">
+      <div class="info">
+        <div class="title">
+          <p class="city">Madrid</p>
+          <p class="weather-condition">Sunny</p>
+        </div>
+        <p class="temperature">31°C</p>
+      </div>
+      <div class="img-container">
+        <img src="./assets/img/sun.png" class="weather-icon" />
+      </div>
+    </div>
+    <div class="week-forecast">
+      <p class="title">3-DAY FORECAST</p>
+      <div class="week-container">
+        <div class="first-day">
+          <p class="day">Today</p>
+          <img src="./assets/img/rain.png" class="weather-icon" />
+          <p class="temperature">15°/30°</p>
+        </div>
+        <div class="second-day">
+          <p class="day">Sunday</p>
+          <img src="./assets/img/storm.png" class="weather-icon" />
+          <p class="temperature">15°/30°</p>
+        </div>
+        <div class="third-day">
+          <p class="day">Monday</p>
+          <img src="./assets/img/clouds.png" class="weather-icon" />
+          <p class="temperature">15°/30°</p>
+        </div>
+      </div>
+    </div>
+    <div class="air-conditions">
+      <div class="real-feel">
+        <p class="title"><span></span>Real Feel</p>
+        <p class="number"></p>
+      </div>
+      <div class="rain-chance">
+        <p class="title"><span></span>Chance of rain</p>
+        <p class="number"></p>
+      </div>
+      <div class="wind">
+        <p class="title"><span></span>Wind</p>
+        <p class="number"></p>
+      </div>
+      <div class="uv-index">
+        <p class="title"><span></span>UV Index</p>
+        <p class="number"></p>
+      </div>
+    </div>
+    <div class="today-forecast"></div>
     <script src="main.js"></script>
   </body>
 </html>
