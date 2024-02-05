@@ -13,6 +13,7 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
     />
+
     <link href="style.css" rel="stylesheet" type="text/css" />
   </head>
 
@@ -24,105 +25,112 @@
       placeholder="Search a city"
       class="search-bar"
     />
+    <label class="switch">
+      <input type="checkbox" class="checkbox" />
+      <p class="toggle-thumb material-symbols-outlined">
+        <span class="c-temp">C°</span>
+        <span class="f-temp">F°</span>
+      </p>
+    </label>
     <div class="current-forecast">
       <div class="info">
         <div class="title">
           <p class="city">Madrid</p>
-          <p class="weather-condition">Sunny</p>
+          <p class="current-condition">Sunny</p>
         </div>
-        <p class="temperature">31°</p>
+        <p class="current-temperature">31°</p>
       </div>
       <div class="img-container">
-        <img src="./assets/img/sun.png" class="weather-icon" />
+        <img src="./assets/img/sun.png" class="current-icon weather-icon" />
       </div>
     </div>
 
     <div class="air-conditions">
-      <div class="real-feel">
+      <div class="real-feel-container">
         <div class="title-container">
           <p class="icon">
             <span class="material-symbols-rounded"> device_thermostat </span>
           </p>
           <div class="text">
             <p class="title">Feels like</p>
-            <p class="number">30°</p>
+            <p class="feel number">30°</p>
           </div>
         </div>
       </div>
-      <div class="rain-chance">
+      <div class="rain-chance-container">
         <div class="title-container">
           <p class="icon">
             <span class="material-symbols-rounded"> rainy_light </span>
           </p>
           <div class="text">
             <p class="title">Chance of rain</p>
-            <p class="number">0%</p>
+            <p class="chance number">0%</p>
           </div>
         </div>
       </div>
-      <div class="wind">
+      <div class="wind-container">
         <div class="title-container">
           <p class="icon">
             <span class="material-symbols-rounded"> air </span>
           </p>
           <div class="text">
             <p class="title">Wind</p>
-            <p class="number">0.2 km/h</p>
+            <p class="wind number">0.2 km/h</p>
           </div>
         </div>
       </div>
-      <div class="uv-index">
+      <div class="uv-index-container">
         <div class="title-container">
           <p class="icon">
             <span class="material-symbols-rounded"> wb_sunny </span>
           </p>
           <div class="text">
             <p class="title">UV Index</p>
-            <p class="number">3</p>
+            <p class="uv number">3</p>
           </div>
         </div>
       </div>
-      <div class="humidity">
+      <div class="humidity-container">
         <div class="title-container">
           <p class="icon">
             <span class="material-symbols-rounded"> water_drop </span>
           </p>
           <div class="text">
             <p class="title">Humidity</p>
-            <p class="number">56%</p>
+            <p class="humidity number">56%</p>
           </div>
         </div>
       </div>
-      <div class="pressure">
+      <div class="pressure-container">
         <div class="title-container">
           <p class="icon">
             <span class="material-symbols-rounded"> compress </span>
           </p>
           <div class="text">
             <p class="title">Pressure</p>
-            <p class="number">1008 hPa</p>
+            <p class="pressure number">1008 hPa</p>
           </div>
         </div>
       </div>
-      <div class="sunset">
+      <div class="sunset-container">
         <div class="title-container">
           <p class="icon">
             <span class="material-symbols-rounded"> wb_twilight </span>
           </p>
           <div class="text">
             <p class="title">Sunset</p>
-            <p class="number">20:58</p>
+            <p class="sunset number">20:58</p>
           </div>
         </div>
       </div>
-      <div class="visibility">
+      <div class="visibility-container">
         <div class="title-container">
           <p class="icon">
             <span class="material-symbols-rounded"> visibility </span>
           </p>
           <div class="text">
             <p class="title">Visibility</p>
-            <p class="number">12 km</p>
+            <p class="visibility number">12 km</p>
           </div>
         </div>
       </div>
@@ -132,20 +140,20 @@
       <div class="week-container">
         <div class="first-day">
           <p class="day">Today</p>
-          <img src="./assets/img/rain.png" class="weather-icon" />
-          <p class="temperature">15°<span>/30°</span></p>
+          <img src="./assets/img/rain.png" class="first-icon weather-icon" />
+          <p class="first-temp temperature">15°<span>/30°</span></p>
         </div>
         <hr />
         <div class="second-day">
           <p class="day">Sunday</p>
-          <img src="./assets/img/storm.png" class="weather-icon" />
-          <p class="temperature">24°<span>/36°</span></p>
+          <img src="./assets/img/storm.png" class="second-icon weather-icon" />
+          <p class="second-temp temperature">24°<span>/36°</span></p>
         </div>
         <hr />
         <div class="third-day">
           <p class="day">Monday</p>
-          <img src="./assets/img/clouds.png" class="weather-icon" />
-          <p class="temperature">6°<span>/14°</span></p>
+          <img src="./assets/img/clouds.png" class="third-icon weather-icon" />
+          <p class="third-temp temperature">6°<span>/14°</span></p>
         </div>
       </div>
     </div>
@@ -155,55 +163,55 @@
         <div>
           <p class="time">6:00 AM</p>
           <div class="icon-container">
-            <img src="./assets/img/clouds.png" class="icon" />
-            <p>Sunny</p>
+            <img src="./assets/img/clouds.png" class="first-time-icon" />
+            <p class="first-time-condition">Sunny</p>
           </div>
-          <p>36<span>/22</span></p>
+          <p class="first-time-temp">36<span>/22</span></p>
         </div>
         <hr />
         <div>
           <p class="time">6:00 AM</p>
           <div class="icon-container">
-            <img src="./assets/img/clouds.png" class="icon" />
-            <p>Sunny</p>
+            <img src="./assets/img/clouds.png" class="second-time-icon" />
+            <p class="second-time-condition">Sunny</p>
           </div>
-          <p>36<span>/22</span></p>
+          <p class="second-time-temp">36<span>/22</span></p>
         </div>
         <hr />
         <div>
           <p class="time">6:00 AM</p>
           <div class="icon-container">
-            <img src="./assets/img/clouds.png" class="icon" />
-            <p>Sunny</p>
+            <img src="./assets/img/clouds.png" class="third-time-icon" />
+            <p class="third-time-condition">Sunny</p>
           </div>
-          <p>36<span>/22</span></p>
+          <p class="third-time-temp">36<span>/22</span></p>
         </div>
         <hr />
         <div>
           <p class="time">6:00 AM</p>
           <div class="icon-container">
-            <img src="./assets/img/clouds.png" class="icon" />
-            <p>Sunny</p>
+            <img src="./assets/img/clouds.png" class="fourth-time-icon" />
+            <p class="fourth-time-condition">Sunny</p>
           </div>
-          <p>36<span>/22</span></p>
+          <p class="fourth-time-temp">36<span>/22</span></p>
         </div>
         <hr />
         <div>
           <p class="time">6:00 AM</p>
           <div class="icon-container">
-            <img src="./assets/img/clouds.png" class="icon" />
-            <p>Sunny</p>
+            <img src="./assets/img/clouds.png" class="fifth-time-icon" />
+            <p class="fifth-time-condition">Sunny</p>
           </div>
-          <p>36<span>/22</span></p>
+          <p class="fifth-time-temp">36<span>/22</span></p>
         </div>
         <hr />
         <div>
           <p class="time">6:00 AM</p>
           <div class="icon-container">
-            <img src="./assets/img/clouds.png" class="icon" />
-            <p>Sunny</p>
+            <img src="./assets/img/clouds.png" class="sixth-time-icon" />
+            <p class="sixth-time-condition">Sunny</p>
           </div>
-          <p>36<span>/22</span></p>
+          <p class="sixth-time-temp">36<span>/22</span></p>
         </div>
       </div>
     </div>
