@@ -1,5 +1,10 @@
+let forecastData;
+const scaleCheckbox = document.querySelector(".checkbox");
+
 const getDayName = (date) =>
   new Date(date).toLocaleDateString("en-US", { weekday: "long" });
+
+const getTempScale = () => (scaleCheckbox.checked ? "c" : "f");
 
 const weatherKeywords = {
   clear: ["sunny", "clear"],
@@ -32,7 +37,7 @@ const findWeatherCondition = (weatherText) => {
   return weatherForecast;
 };
 
-const getWeatherIcon = (weatherText, isDay) => {
+const getWeatherIcon = (weatherText, isDay = 1) => {
   const weatherForecast = findWeatherCondition(weatherText);
   if (weatherForecast === "clear" && isDay) return "./assets/img/sun.png";
   if (weatherForecast === "clear") return "./assets/img/clear.png";
@@ -85,6 +90,45 @@ const updateUI = (data, scale) => {
 
   const visibility = document.querySelector(".visibility");
   visibility.textContent = `${data.current.vis_km} km`;
+
+  const todayIcn = document.querySelector(".first-icon");
+  todayIcn.src = getWeatherIcon(
+    data.forecast.forecastday[0].day.condition.text
+  );
+
+  const dayWeekName = document.querySelectorAll(".day-name");
+  dayWeekName.forEach((e, i) => {
+    e.textContent = getDayName(data.forecast.forecastday[i + 1].date);
+  });
+
+  const maxTempWeek = document.querySelectorAll(".weeK-max-temp");
+  maxTempWeek.forEach((e, i) => {
+    e.textContent = data.forecast.forecastday[i].day[`maxtemp_${scale}`];
+  });
+
+  const minTempWeek = document.querySelectorAll(".week-min-temp");
+  minTempWeek.forEach((e, i) => {
+    e.textContent = `/${data.forecast.forecastday[i].day[`mintemp_${scale}`]}°`;
+  });
+
+  for (let i = 0; i < 6; i += 1) {
+    const timeIcn = document.querySelectorAll(".time-icon");
+    const timeSlots = [6, 9, 12, 15, 18, 21];
+
+    timeIcn[i].src = getWeatherIcon(
+      data.forecast.forecastday[0].hour[timeSlots[i]].condition.text,
+      data.forecast.forecastday[0].hour[timeSlots[i]].is_day
+    );
+
+    const timeCond = document.querySelectorAll(".time-condition");
+    timeCond[i].textContent =
+      data.forecast.forecastday[0].hour[i].condition.text;
+
+    const tempHour = document.querySelectorAll(".hour-temp");
+    tempHour[i].textContent = `${
+      data.forecast.forecastday[0].hour[timeSlots[i]][`temp_${scale}`]
+    }°`;
+  }
 };
 
 const getWeather = async (location) => {
@@ -93,15 +137,9 @@ const getWeather = async (location) => {
       `http://api.weatherapi.com/v1/forecast.json?key=45169731569b40d4aeb220416243001&q=${location}&days=3`,
       { mode: "cors" }
     );
-    const forecastData = await response.json();
-    updateUI(forecastData, "c");
+    forecastData = await response.json();
+    updateUI(forecastData, getTempScale());
     console.log(forecastData);
-    // console.log(forecastData.current.temp_c);
-    // console.log(getDayName(forecastData.forecast.forecastday[0].date));
-    // getWeatherIcon(
-    //   forecastData.current.condition.text,
-    //   forecastData.current.is_day
-    // );
   } catch (error) {
     console.log(error);
   }
@@ -113,3 +151,7 @@ const search = document.querySelector(".search-bar");
 search.onsearch = () => {
   getWeather(search.value);
 };
+
+scaleCheckbox.addEventListener("change", () =>
+  updateUI(forecastData, getTempScale())
+);

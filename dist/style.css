@@ -225,7 +225,7 @@ body {
   font-weight: 500;
 }
 
-.week-container .temperature span {
+.week-container .week-min-temp {
   color: var(--text-secondary-color);
   font-weight: 400;
 }
@@ -280,14 +280,14 @@ body {
   width: 40px;
 }
 
-.today-forecast span {
-  color: var(--text-secondary-color);
-}
-
 .today-forecast hr {
   height: 1px;
   border: none;
   background-color: var(--text-secondary-color);
   opacity: 50%;
   border-radius: 1px;
+}
+
+.time-condition {
+  width: min-content;
 }
