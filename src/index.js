@@ -1,5 +1,6 @@
 let forecastData;
 const scaleCheckbox = document.querySelector(".checkbox");
+const weatherAPIKey = "45169731569b40d4aeb220416243001";
 
 const getDayName = (date) =>
   new Date(date).toLocaleDateString("en-US", { weekday: "long" });
@@ -134,12 +135,56 @@ const updateUI = (data, scale) => {
 const getWeather = async (location) => {
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=45169731569b40d4aeb220416243001&q=${location}&days=3`,
+      `http://api.weatherapi.com/v1/forecast.json?key=${weatherAPIKey}&q=${location}&days=3`,
       { mode: "cors" }
     );
     forecastData = await response.json();
     updateUI(forecastData, getTempScale());
     console.log(forecastData);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+const hideAutoComplete = () => {
+  const elContainer = document.querySelector(".autocomplete");
+  elContainer.style.display = "none";
+};
+
+const createAutoComplete = (data) => {
+  const elContainer = document.querySelector(".autocomplete");
+  elContainer.textContent = "";
+  if (data.length) {
+    elContainer.style.display = "flex";
+    data.forEach((city) => {
+      const cityEl = document.createElement("button");
+      const countryEl = document.createElement("span");
+
+      cityEl.textContent = city.name;
+      countryEl.textContent = `, ${city.region}, ${city.country}`;
+
+      cityEl.addEventListener("click", () => {
+        getWeather(`id:${city.id}`);
+        hideAutoComplete();
+      });
+
+      cityEl.append(countryEl);
+      elContainer.append(cityEl);
+    });
+  } else {
+    hideAutoComplete();
+  }
+};
+
+const getAutoComplete = async (location) => {
+  try {
+    const response = await fetch(
+      `http://api.weatherapi.com/v1/search.json?key=${weatherAPIKey}&q=${location}`,
+      { mode: "cors" }
+    );
+    const suggestionData = await response.json();
+    console.log(suggestionData);
+    createAutoComplete(suggestionData);
   } catch (error) {
     console.log(error);
   }
@@ -151,6 +196,10 @@ const search = document.querySelector(".search-bar");
 search.onsearch = () => {
   getWeather(search.value);
 };
+
+search.addEventListener("input", () => {
+  getAutoComplete(search.value);
+});
 
 scaleCheckbox.addEventListener("change", () =>
   updateUI(forecastData, getTempScale())
