@@ -2,11 +2,15 @@ let forecastData;
 const scaleCheckbox = document.querySelector(".checkbox");
 const weatherAPIKey = "45169731569b40d4aeb220416243001";
 
+// Function to get day name from date
+
 const getDayName = (date) =>
   new Date(date).toLocaleDateString("en-US", { weekday: "long" });
 
+// Function to get temperature scale based on checkbox state
 const getTempScale = () => (scaleCheckbox.checked ? "c" : "f");
 
+// Keywords associated with weather conditions
 const weatherKeywords = {
   clear: ["sunny", "clear"],
   thunder: ["thunder", "thundery"],
@@ -15,17 +19,7 @@ const weatherKeywords = {
   snow: ["snow", "ice", "blizzard"],
 };
 
-// const findWeatherCondition = (weatherText) => {
-//   Object.values(weatherKeywords).forEach((weatherCondition) => {
-//     weatherCondition.some((keyword) => {
-//       if (weatherText.toLowerCase().split(" ").includes(keyword)) {
-//         console.log(weatherCondition);
-//         return weatherCondition;
-//       }
-//     });
-//   });
-// };
-
+// Function to find weather condition based on keywords
 const findWeatherCondition = (weatherText) => {
   let weatherForecast;
   Object.keys(weatherKeywords).some((weatherCondition) => {
@@ -38,6 +32,7 @@ const findWeatherCondition = (weatherText) => {
   return weatherForecast;
 };
 
+// Function to get weather icon based on condition and time
 const getWeatherIcon = (weatherText, isDay = 1) => {
   const weatherForecast = findWeatherCondition(weatherText);
   if (weatherForecast === "clear" && isDay) return "./assets/img/sun.png";
@@ -52,7 +47,9 @@ const getWeatherIcon = (weatherText, isDay = 1) => {
   if (weatherForecast === "thunder") return "./assets/img/storm_night.png";
 };
 
+// Function to update UI with weather data
 const updateUI = (data, scale) => {
+  // Current weather
   const city = document.querySelector(".city");
   city.textContent = data.location.name;
 
@@ -92,11 +89,13 @@ const updateUI = (data, scale) => {
   const visibility = document.querySelector(".visibility");
   visibility.textContent = `${data.current.vis_km} km`;
 
+  // Today's weather
   const todayIcn = document.querySelector(".first-icon");
   todayIcn.src = getWeatherIcon(
     data.forecast.forecastday[0].day.condition.text
   );
 
+  // Week's weather
   const dayWeekName = document.querySelectorAll(".day-name");
   dayWeekName.forEach((e, i) => {
     e.textContent = getDayName(data.forecast.forecastday[i + 1].date);
@@ -112,6 +111,7 @@ const updateUI = (data, scale) => {
     e.textContent = `/${data.forecast.forecastday[i].day[`mintemp_${scale}`]}°`;
   });
 
+  // Hourly weather
   for (let i = 0; i < 6; i += 1) {
     const timeIcn = document.querySelectorAll(".time-icon");
     const timeSlots = [6, 9, 12, 15, 18, 21];
@@ -140,17 +140,18 @@ const getWeather = async (location) => {
     );
     forecastData = await response.json();
     updateUI(forecastData, getTempScale());
-    console.log(forecastData);
   } catch (error) {
     console.log(error);
   }
 };
 
+// Function to hide autocomplete suggestions
 const hideAutoComplete = () => {
   const elContainer = document.querySelector(".autocomplete");
   elContainer.style.display = "none";
 };
 
+// Function to create autocomplete suggestions
 const createAutoComplete = (data) => {
   const elContainer = document.querySelector(".autocomplete");
   elContainer.textContent = "";
@@ -183,7 +184,6 @@ const getAutoComplete = async (location) => {
       { mode: "cors" }
     );
     const suggestionData = await response.json();
-    console.log(suggestionData);
     createAutoComplete(suggestionData);
   } catch (error) {
     console.log(error);
@@ -197,6 +197,7 @@ search.onsearch = () => {
   getWeather(search.value);
 };
 
+// Event listeners
 search.addEventListener("input", () => {
   getAutoComplete(search.value);
 });
@@ -204,3 +205,9 @@ search.addEventListener("input", () => {
 scaleCheckbox.addEventListener("change", () =>
   updateUI(forecastData, getTempScale())
 );
+
+window.addEventListener("mousedown", (event) => {
+  if (!event.target.closest(".autocomplete")) {
+    hideAutoComplete();
+  }
+});
