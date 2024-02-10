@@ -51,7 +51,7 @@ const createSuggestions = (data) => {
 const getSuggestions = async (location) => {
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/search.json?key=${weatherAPIKey}&q=${location}`,
+      `https://api.weatherapi.com/v1/search.json?key=${weatherAPIKey}&q=${location}`,
       { mode: "cors" }
     );
     const suggestionData = await response.json();

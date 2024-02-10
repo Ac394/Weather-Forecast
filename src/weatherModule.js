@@ -47,7 +47,7 @@ const getWeatherIcon = (weatherText, isDay = 1) => {
 const getWeather = async (location) => {
   try {
     const response = await fetch(
-      `http://api.weatherapi.com/v1/forecast.json?key=${weatherAPIKey}&q=${location}&days=3`,
+      `https://api.weatherapi.com/v1/forecast.json?key=${weatherAPIKey}&q=${location}&days=3`,
       { mode: "cors" }
     );
     forecastData = await response.json();
