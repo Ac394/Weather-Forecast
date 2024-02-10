@@ -1,4 +1,4 @@
-import { getAutoComplete, hideAutoComplete } from "./autocompleteModule";
+import { getSuggestions, hideSuggestions } from "./suggestionsModule";
 import updateUI from "./uiModule";
 import { forecastData, getTempScale, getWeather } from "./weatherModule";
 
@@ -13,7 +13,7 @@ search.addEventListener("search", () => {
 });
 
 search.addEventListener("input", () => {
-  getAutoComplete(search.value);
+  getSuggestions(search.value);
 });
 
 document
@@ -22,6 +22,6 @@ document
 
 window.addEventListener("mousedown", (event) => {
   if (!event.target.closest(".autocomplete")) {
-    hideAutoComplete();
+    hideSuggestions();
   }
 });
