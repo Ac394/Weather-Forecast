@@ -65,6 +65,9 @@ const getSuggestions = async (location) => {
 const search = document.querySelector(".search-bar");
 search.addEventListener("keyup", (e) => {
   const autocompleteBtns = document.querySelectorAll(".autocomplete > button");
+  if (e.key === "Enter") {
+    hideSuggestions();
+  }
   if (e.key === "ArrowDown") {
     e.preventDefault();
     autocompleteBtns[0].focus();
