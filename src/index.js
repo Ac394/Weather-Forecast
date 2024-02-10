@@ -2,8 +2,8 @@ import { getAutoComplete, hideAutoComplete } from "./autocompleteModule";
 import updateUI from "./uiModule";
 import { forecastData, getTempScale, getWeather } from "./weatherModule";
 
-// Initiate default City Forecast
-getWeather("Rome");
+// Initialize weather forecast with IP Geolocation
+getWeather("auto:ip");
 
 // Event listeners
 const search = document.querySelector(".search-bar");
